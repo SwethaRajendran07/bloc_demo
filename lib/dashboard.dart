@@ -12,6 +12,8 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,14 +27,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  FirebaseAuth.instance.currentUser!.displayName!,
+                  auth.currentUser!.displayName ?? "Hello World",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  FirebaseAuth.instance.currentUser!.email!,
+                  auth.currentUser!.email ?? "",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
                 ),
                 SizedBox(
@@ -46,8 +48,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     "LOG OUT",
                     style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
-                  onPressed: () {
-                    AuthService().signOut();
+                  onPressed: () async {
+                    await AuthService().signOut(context);
                   },
                 ),
               ],

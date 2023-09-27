@@ -5,11 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
-  // final BuildContext context;
-  //
-  // AuthService(this.context);
-
-  //handleAuthState()
   handleAuthState() {
     return StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -22,7 +17,6 @@ class AuthService {
         });
   }
 
-  //signInWithGoogle()
   signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn(scopes: <String>["email"]).signIn();
 
@@ -37,12 +31,15 @@ class AuthService {
   }
 
   //Sign out
-  signOut() {
-    FirebaseAuth.instance.signOut();
+  signOut(BuildContext context) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    await auth.signOut().whenComplete(() {
+      Navigator.pop(context);
+    });
   }
 
-  // void toggleTheme() {
-  //   final themeModeBloc = BlocProvider.of<ThemeModeBloc>(context);
-  //   themeModeBloc.add(ThemeModeEvent.toggle);
-  // }
+// void toggleTheme() {
+//   final themeModeBloc = BlocProvider.of<ThemeModeBloc>(context);
+//   themeModeBloc.add(ThemeModeEvent.toggle);
+// }
 }

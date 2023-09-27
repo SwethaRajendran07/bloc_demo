@@ -1,4 +1,5 @@
 import 'package:bloc_demo/auth_service.dart';
+import 'package:bloc_demo/dashboard.dart';
 import 'package:bloc_demo/signUpScreen.dart';
 import 'package:bloc_demo/themeModeBloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +19,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final passwordController = TextEditingController();
 
   // sign user in method
-  void signUserIn() async {
+  signUserIn() async {
     showDialog(
         context: context,
         builder: (context) {
@@ -28,13 +29,20 @@ class _SignInScreenState extends State<SignInScreen> {
         });
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: emailController.text, password: passwordController.text)
+          .whenComplete(() {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => DashboardScreen()),
+        );
+      });
     } on FirebaseAuthException catch (e) {
+      print("eeeeeeeeeeeeeeeeee");
+      print(e);
       Navigator.pop(context);
-      showErrorMessage(e.code);
+      // showErrorMessage(e.code);
     }
-
-    Navigator.pop(context);
   }
 
   void showErrorMessage(String message) {
@@ -142,8 +150,14 @@ class _SignInScreenState extends State<SignInScreen> {
 
                     // sign in button
                     ElevatedButton(
-                      onPressed: () {
-                        signUserIn;
+                      onPressed: () async {
+                        // try {
+                        //   await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+                        // } on FirebaseAuthException catch (e) {
+                        //   Navigator.pop(context);
+                        //   showErrorMessage(e.code);
+                        // }
+                        await signUserIn();
                         print("signed in");
                         // Navigator.push(
                         //   context,
