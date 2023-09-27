@@ -5,6 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
+  // final BuildContext context;
+  //
+  // AuthService(this.context);
+
   //handleAuthState()
   handleAuthState() {
     return StreamBuilder(
@@ -36,4 +40,9 @@ class AuthService {
   signOut() {
     FirebaseAuth.instance.signOut();
   }
+
+  // void toggleTheme() {
+  //   final themeModeBloc = BlocProvider.of<ThemeModeBloc>(context);
+  //   themeModeBloc.add(ThemeModeEvent.toggle);
+  // }
 }

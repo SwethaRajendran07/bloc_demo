@@ -142,7 +142,14 @@ class _SignInScreenState extends State<SignInScreen> {
 
                     // sign in button
                     ElevatedButton(
-                      onPressed: signUserIn,
+                      onPressed: () {
+                        signUserIn;
+                        print("signed in");
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => DashboardScreen()),
+                        // );
+                      },
                       child: Text(
                         "Sign In",
                         style: TextStyle(

@@ -20,6 +20,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           create: (context) => ThemeModeBloc(),
           child: Container(
             color: Colors.white,
+            width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -38,7 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   height: 30,
                 ),
                 MaterialButton(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(20.0),
                   color: Colors.green,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                   child: Text(

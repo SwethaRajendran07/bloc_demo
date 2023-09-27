@@ -1,7 +1,5 @@
-// import 'dart:js';
-
+import 'package:bloc_demo/SignInScreen.dart';
 import 'package:bloc_demo/auth_service.dart';
-import 'package:bloc_demo/dashboard.dart';
 import 'package:bloc_demo/themeModeBloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -151,10 +149,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ElevatedButton(
                       onPressed: () {
                         signUserUp();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => DashboardScreen()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => DashboardScreen()),
+                        // );
                       },
                       child: Text(
                         "Sign Up",
@@ -208,7 +206,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => SignUpScreen()),
+                                    MaterialPageRoute(builder: (context) => SignInScreen()),
                                   );
                                 },
                                 style: ButtonStyle(
